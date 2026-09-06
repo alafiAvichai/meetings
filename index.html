@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>מעקב פגישות</title>
+
+<meta name="description" content="מעקב אישי אחרי פגישות טיפול">
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#0F1A1E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="פגישות">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600&family=Frank+Ruhl+Libre:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./app.css">
+</head>
+<body>
+
+<div id="updateBar" class="update-bar" hidden>
+  <span>יש גרסה חדשה של האפליקציה</span>
+  <button id="updateBtn" type="button">רענון</button>
+</div>
+
+<main class="app">
+
+  <header class="month">
+    <button id="prevMonth" class="month__nav" type="button" aria-label="חודש קודם">‹</button>
+    <h1 id="monthName" class="month__name">—</h1>
+    <button id="nextMonth" class="month__nav" type="button" aria-label="חודש הבא">›</button>
+  </header>
+
+  <section class="count" aria-live="polite">
+    <div id="dots" class="dots" aria-hidden="true"></div>
+    <div id="countNum" class="count__num">0</div>
+    <p id="countLabel" class="count__label">אין עדיין פגישות בחודש הזה</p>
+  </section>
+
+  <p id="arrivePrompt" class="arrive" hidden>הגעת לפגישה? אפשר לרשום אותה עכשיו.</p>
+
+  <div class="log">
+    <button id="logBtn" class="log__btn" type="button">
+      <span class="log__ring" aria-hidden="true"></span>
+      <span class="log__text">הייתי<br>בפגישה</span>
+    </button>
+    <p id="todayNote" class="log__today">&nbsp;</p>
+  </div>
+
+  <section class="history">
+    <div class="history__head">
+      <h2>הפגישות של החודש</h2>
+      <span id="totalAll" class="history__total"></span>
+    </div>
+    <ul id="list" class="list"></ul>
+
+    <details class="panel">
+      <summary>הוספת פגישה שכבר היתה</summary>
+      <div class="panel__body">
+        <label class="field">
+          <span>תאריך</span>
+          <input type="date" id="addDate">
+        </label>
+        <label class="field">
+          <span>שעה</span>
+          <input type="time" id="addTime" value="17:00">
+        </label>
+        <button id="addBtn" class="btn" type="button">הוספה</button>
+      </div>
+    </details>
+
+    <details class="panel">
+      <summary>גיבוי ושחזור</summary>
+      <div class="panel__body">
+        <p class="panel__hint">הנתונים נשמרים רק במכשיר הזה. כדאי לייצא קובץ גיבוי מדי פעם.</p>
+        <button id="exportBtn" class="btn" type="button">ייצוא קובץ גיבוי</button>
+        <label class="btn btn--ghost" for="importFile">שחזור מקובץ</label>
+        <input type="file" id="importFile" accept="application/json" hidden>
+      </div>
+    </details>
+  </section>
+
+  <p id="storageWarn" class="warn" hidden>הדפדפן חוסם שמירה מקומית, ולכן הרישומים ימחקו כשתסגור את האפליקציה.</p>
+
+</main>
+
+<div id="toast" class="toast" role="status" hidden>
+  <span id="toastText"></span>
+  <button id="toastAction" class="toast__action" type="button">ביטול</button>
+</div>
+
+<script src="./app.js"></script>
+</body>
+</html>
